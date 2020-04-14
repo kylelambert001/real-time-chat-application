@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import queryString from "query-string";
 import io from "socket.io-client";
 const socket = io("localhost:5000");
 
@@ -29,6 +30,9 @@ class Chat extends Component {
   };
 
   render() {
+    const search = this.props.location.search;
+    const parsed = queryString.parse(search);
+    console.log(parsed);
     return (
       <div className="Chat">
         <h1>Chat Page</h1>
