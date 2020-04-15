@@ -1,0 +1,49 @@
+.Join {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: lightgray;
+}
+
+.form-container {
+  width: 50rem;
+  padding: 2.8rem;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  margin-top: 3rem;
+}
+
+.form-input {
+  font-size: 1.6rem;
+  padding: 1rem;
+  border: 1px solid lightgray;
+  margin: 0.6rem 0;
+  border-radius: 2px;
+  outline: none;
+}
+
+.form-input:focus {
+  border: 1px solid lightseagreen;
+}
+
+.form-input::placeholder {
+  opacity: 0.5;
+}
+
+.form-link {
+  padding: 1rem;
+  margin-top: 1.4rem;
+  background-color: lightseagreen;
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}

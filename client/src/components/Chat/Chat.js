@@ -8,13 +8,20 @@ class Chat extends Component {
     super(props);
     this.state = {
       input: "",
+      name: "",
+      room: "",
     };
   }
 
   componentDidMount() {
+    const search = queryString.parse(this.props.location.search);
+    this.setState({ name: search.name, room: search.room });
+
     socket.on("message", (message) => {
       console.log(message);
     });
+
+    socket.emit("join_room", { name: search.name, room: search.room });
   }
 
   handleChange = (e) => {
@@ -25,14 +32,14 @@ class Chat extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit("chat_message", { user: "Kyle", text: this.state.input });
+    socket.emit("chat_message", {
+      from: this.state.name,
+      text: this.state.input,
+    });
     this.setState({ input: "" });
   };
 
   render() {
-    const search = this.props.location.search;
-    const parsed = queryString.parse(search);
-    console.log(parsed);
     return (
       <div className="Chat">
         <h1>Chat Page</h1>
