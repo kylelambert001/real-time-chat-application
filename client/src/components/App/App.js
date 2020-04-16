@@ -7,7 +7,7 @@ const App = (props) => {
   return (
     <Switch>
       <Route exact path="/" component={Join} />
-      <Route exact path="/chat" component={Chat} />
+      <Route path="/chat" component={Chat} />
     </Switch>
   );
 };
