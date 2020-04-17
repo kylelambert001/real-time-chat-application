@@ -8,6 +8,11 @@ class Login extends Component {
       nickname: "",
       error: "",
     };
+    this.textInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.textInput.current.focus();
   }
 
   handleChange = (e) => {
@@ -21,14 +26,17 @@ class Login extends Component {
     const { nickname } = this.state;
     const { setUser, socket } = this.props;
 
-    if (!nickname) return false;
+    if (!nickname) {
+      this.setError("Please add a username");
+      return false;
+    }
 
     socket.emit("VERIFY_USER", nickname, (response) => {
       if (!response.isUser) {
         this.setState({ nickname: "" });
         setUser(response.user);
       } else {
-        this.setError("Username is taken");
+        this.setError("Username is already taken");
       }
     });
   };
@@ -48,8 +56,8 @@ class Login extends Component {
             type="text"
             className="Login-input"
             id="nickname"
-            placeholder="Foxy..."
             name="nickname"
+            ref={this.textInput}
             onChange={this.handleChange}
             autoComplete="off"
           />

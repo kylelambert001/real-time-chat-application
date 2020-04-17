@@ -13,6 +13,33 @@ const socketManager = (socket) => {
       callback({ isUser: true });
     }
   });
+
+  socket.on("USER_CONNECTED", (user) => {
+    socket.name = user.name;
+    addUser(user);
+    console.log(`${user.name}, has been added to connectedUsers`);
+  });
+
+  socket.on("disconnect", () => {
+    const name = socket.name;
+
+    if (name) {
+      removeUser(name);
+      console.log(`${name}, has been removed from connectedUsers`);
+    }
+  });
+};
+
+const addUser = (user) => {
+  connectedUsers.push(user);
+  return user;
+};
+
+const removeUser = (name) => {
+  const index = connectedUsers.findIndex((user) => user.name === name);
+  if (index !== -1) {
+    connectedUsers.splice(index, 1);
+  }
 };
 
 const isUser = (nickname) => {
