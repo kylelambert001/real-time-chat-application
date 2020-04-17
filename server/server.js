@@ -8,12 +8,13 @@ const { socketManager } = require("./socketManager.js");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+// require("./socketManager.js")(io);
 
 const PORT = process.env.PORT || 5000;
 
 app.use(router);
 
-io.on("connection", (socket) => socketManager(socket));
+io.on("connection", (socket) => socketManager(socket, io));
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

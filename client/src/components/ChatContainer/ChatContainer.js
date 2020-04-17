@@ -4,7 +4,10 @@ import "./ChatContainer.css";
 
 class ChatContainer extends Component {
   componentDidMount() {
-    this.addUser();
+    const { socket } = this.props;
+    socket.on("USER_DISCONNECTED", (connectedUsers) => {
+      console.log(connectedUsers);
+    });
   }
 
   componentWillUnmount() {
@@ -12,11 +15,6 @@ class ChatContainer extends Component {
     socket.emit("disconnect");
     socket.off();
   }
-
-  addUser = () => {
-    const { socket, user } = this.props;
-    socket.emit("USER_CONNECTED", user);
-  };
 
   render() {
     return <div>ChatContainer</div>;

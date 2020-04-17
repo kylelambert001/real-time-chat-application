@@ -2,29 +2,32 @@ const { v4: uuidv4 } = require("uuid");
 
 const connectedUsers = [];
 
-const socketManager = (socket) => {
+const socketManager = (socket, io) => {
   console.log("New socket connection");
 
+  // checks to see if username has already been taken
   socket.on("VERIFY_USER", (nickname, callback) => {
     nickname = nickname.trim().toLowerCase();
     if (!isUser(nickname)) {
       callback({ isUser: false, user: createUser(nickname) });
     } else {
-      callback({ isUser: true });
+      callback({ isUser: true, user: null });
     }
   });
 
+  // adds new user to connectedUsers array
   socket.on("USER_CONNECTED", (user) => {
     socket.name = user.name;
     addUser(user);
     console.log(`${user.name}, has been added to connectedUsers`);
   });
 
+  // remove disconnected user from connectedUsers array
   socket.on("disconnect", () => {
     const name = socket.name;
-
     if (name) {
       removeUser(name);
+      io.emit("USER_DISCONNECTED", connectedUsers);
       console.log(`${name}, has been removed from connectedUsers`);
     }
   });
