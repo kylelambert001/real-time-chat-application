@@ -13,33 +13,35 @@ class Layout extends Component {
     };
   }
 
-  componentDidMount() {
-    this.initSocket();
-  }
+  // componentDidMount() {
+  //   this.initSocket();
+  // }
 
-  initSocket = () => {
-    const socket = io("localhost:5000");
-    this.setState({ socket });
-    socket.on("connect", () => {
-      console.log("Connected");
-    });
-  };
+  // initSocket = () => {
+  //   const socket = io("localhost:5000");
+  //   this.setState({ socket });
+  //   socket.on("connect", () => {
+  //     console.log("Connected");
+  //   });
+  // };
 
-  setUser = (user) => {
-    const { socket } = this.state;
-    this.setState({ user });
-    socket.emit("USER_CONNECTED", user);
-    console.log(user);
-  };
+  // setUser = (user) => {
+  //   const { socket } = this.state;
+  //   this.setState({ user });
+  //   socket.emit("USER_CONNECTED", user);
+  //   // console.log(user);
+  // };
 
   render() {
     const { user, socket } = this.state;
 
-    return user ? (
-      <ChatContainer socket={socket} user={user} />
-    ) : (
-      <Login setUser={this.setUser} socket={socket} />
-    );
+    return <ChatContainer socket={socket} user={user} />;
+
+    // return user ? (
+    //   <ChatContainer socket={socket} user={user} />
+    // ) : (
+    //   <Login setUser={this.setUser} socket={socket} />
+    // );
   }
 }
 

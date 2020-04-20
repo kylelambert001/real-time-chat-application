@@ -43,10 +43,10 @@
 
 .Login-error {
   display: block;
-  margin-top: 1.3rem;
-  font-size: 1.3rem;
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #a6b1e1;
+  color: lightcoral;
 }

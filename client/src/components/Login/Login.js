@@ -46,6 +46,7 @@ class Login extends Component {
   };
 
   render() {
+    const { error } = this.state;
     return (
       <div className="Login">
         <form className="Login-form" onSubmit={this.handleSubmit}>
@@ -61,7 +62,7 @@ class Login extends Component {
             onChange={this.handleChange}
             autoComplete="off"
           />
-          <p className="Login-error">{this.state.error}</p>
+          <p className="Login-error">{error ? error : null}</p>
         </form>
       </div>
     );

@@ -1,0 +1,11 @@
+.Sidebar {
+  grid-column: 1 / 2;
+  background-color: #424874;
+  color: white;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* super light purple: #f4eeff
+very light purple: #dcd6f7
+light mild blue: #dcd6f7  
+dark mild blue: #424874 */

@@ -1,0 +1,36 @@
+.MessageForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.4rem;
+}
+
+.MessageForm-input {
+  flex: 1;
+  font-size: inherit;
+  outline: none;
+  background-color: #f4eeff;
+  border: none;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  padding: 1.2rem;
+  color: inherit;
+}
+
+.MessageForm-input::placeholder {
+  color: #a6b1e1;
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.MessageForm-submit {
+  padding: 1.2rem;
+  background-color: #424874;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  outline: none;
+  border: none;
+  font-size: inherit;
+  color: white;
+  cursor: pointer;
+}
