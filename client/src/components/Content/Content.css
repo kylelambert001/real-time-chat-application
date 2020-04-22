@@ -1,6 +1,8 @@
 .Content {
-  grid-column: 2 / 3;
+  /* grid-column: 2 / 3; */
   display: flex;
   flex-direction: column;
   background-color: transparent;
+  height: 100%;
+  background-color: #f4eeff;
 }

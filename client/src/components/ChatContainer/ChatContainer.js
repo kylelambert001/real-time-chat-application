@@ -21,7 +21,7 @@ class ChatContainer extends Component {
   render() {
     return (
       <div className="ChatContainer">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Content />
       </div>
     );
