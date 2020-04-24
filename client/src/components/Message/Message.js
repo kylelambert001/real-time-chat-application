@@ -6,17 +6,19 @@ function Message(props) {
   return (
     <div
       className={`Message ${isSender ? "Message-sender" : "Message-reciever"}`}>
-      <div className="Message-bubble">
+      <div className="Message-box">
         <div className="Message-info">
-          <p className="Message-sender">Kyle Lambert</p>
-          <p className="Message-time">7:28PM</p>
+          {!isSender ? <p className="Message-user">Bobby</p> : null}
+          <p className="Message-time">4:29AM</p>
         </div>
-        <div className="Message-text">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum qui
-          eveniet debitis porro voluptatum nihil blanditiis doloremque impedit
-          hic fugiat reiciendis vitae, quis labore at? Labore ea similique
-          repellat beatae?Corporis cupiditate, culpa officiis porro ullam quos
-          repellat. Est voluptate excepturi doloribus
+        <div className="Message-bubble">
+          <div className="Message-text">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum qui
+            eveniet debitis porro voluptatum nihil blanditiis doloremque impedit
+            hic fugiat reiciendis vitae, quis labore at? Labore ea similique
+            repellat beatae?Corporis cupiditate, culpa officiis porro ullam quos
+            repellat. Est voluptate excepturi doloribus
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 .ChatContainer {
-  /* display: grid; */
+  display: grid;
   height: 100%;
   width: 100%;
-  /* grid-template-columns: 350px auto; */
+  grid-template-columns: 250px auto;
   background-color: white;
 }

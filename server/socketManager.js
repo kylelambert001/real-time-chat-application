@@ -1,6 +1,12 @@
 const { v4: uuidv4 } = require("uuid");
 
 const connectedUsers = [];
+const defaultChat = {
+  chat: "community",
+  id: uuidv4(),
+  messages: [],
+  users: [],
+};
 
 const socketManager = (socket, io) => {
   console.log("New socket connection");
@@ -20,6 +26,10 @@ const socketManager = (socket, io) => {
     socket.name = user.name;
     addUser(user);
     console.log(`${user.name}, has been added to connectedUsers`);
+  });
+
+  socket.on("INIT_CHAT", () => {
+    socket.emit("CHAT_CHANGED", defaultChat);
   });
 
   // remove disconnected user from connectedUsers array
@@ -54,6 +64,14 @@ const createUser = (nickname) => {
     name: nickname,
     id: uuidv4(),
     chat: "community",
+  };
+};
+
+const createChat = (chat) => {
+  return {
+    chat: chat,
+    id: uuidv4(),
+    members: [],
   };
 };
 

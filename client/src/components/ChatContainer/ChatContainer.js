@@ -1,28 +1,43 @@
 import React, { Component } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import Content from "../Content/Content";
+import Main from "../Main/Main";
 
 import "./ChatContainer.css";
 
 class ChatContainer extends Component {
-  // componentDidMount() {
-  //   const { socket } = this.props;
-  //   socket.on("USER_DISCONNECTED", (connectedUsers) => {
-  //     console.log(connectedUsers);
-  //   });
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      current_chat: "",
+    };
+  }
 
-  // componentWillUnmount() {
-  //   const { socket } = this.props;
-  //   socket.emit("disconnect");
-  //   socket.off();
-  // }
+  componentDidMount() {
+    const { socket } = this.props;
+
+    socket.emit("INIT_CHAT");
+
+    socket.on("CHAT_CHANGED", (chat) => {
+      this.setState({ current_chat: chat });
+      console.log(chat);
+    });
+
+    socket.on("USER_DISCONNECTED", (connectedUsers) => {
+      console.log(connectedUsers);
+    });
+  }
+
+  componentWillUnmount() {
+    const { socket } = this.props;
+    socket.emit("disconnect");
+    socket.off();
+  }
 
   render() {
     return (
       <div className="ChatContainer">
-        {/* <Sidebar /> */}
-        <Content />
+        <Sidebar />
+        <Main current_chat={this.state.current_chat} />
       </div>
     );
   }

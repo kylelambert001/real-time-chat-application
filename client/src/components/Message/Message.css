@@ -12,26 +12,67 @@
   /* background-color: #dcd6f7; */
 }
 
-.Message-bubble {
+.Message-box {
   width: 60%;
-  padding: 1.5rem;
   margin: 0.5rem 2rem;
+}
+
+.Message-bubble {
+  padding: 1.5rem;
   border-radius: 18px;
 }
 
 .Message-sender .Message-bubble {
   background-color: #424874;
-  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
   color: #ffffff;
 }
+
 .Message-reciever .Message-bubble {
   background-color: #dcd6f7;
-  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
-/* .Message-reciever.Message-bubble {
-  background-color: green;
-  border-radius: 10px;
-  padding: 1rem;
-  width: 60%;
-} */
+.Message-info {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 1.5rem;
+}
+
+.Message-user {
+  padding-right: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.Message-time {
+  color: #a6b1e1;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.Message-dot {
+  display: inline-block;
+  width: 2rem;
+  position: relative;
+}
+
+.Message-dot::after {
+  content: "";
+  height: 4px;
+  width: 4px;
+  background-color: #a6b1e1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
+  border-radius: 50%;
+}
+
+.Message-sender .Message-info {
+  justify-content: flex-end;
+}
+
+.Message-reciever .Message-info {
+  justify-content: flex-start;
+}
