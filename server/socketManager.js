@@ -1,19 +1,13 @@
 const { v4: uuidv4 } = require("uuid");
+const moment = require("moment");
 
 const connectedUsers = [];
-const defaultChat = {
-  chat: "community",
-  id: uuidv4(),
-  messages: [],
-  users: [],
-};
 
 const socketManager = (socket, io) => {
   console.log("New socket connection");
 
   // checks to see if username has already been taken
   socket.on("VERIFY_USER", (nickname, callback) => {
-    nickname = nickname.trim().toLowerCase();
     if (!isUser(nickname)) {
       callback({ isUser: false, user: createUser(nickname) });
     } else {
@@ -25,11 +19,14 @@ const socketManager = (socket, io) => {
   socket.on("USER_CONNECTED", (user) => {
     socket.name = user.name;
     addUser(user);
-    console.log(`${user.name}, has been added to connectedUsers`);
-  });
-
-  socket.on("INIT_CHAT", () => {
-    socket.emit("CHAT_CHANGED", defaultChat);
+    socket.emit(
+      "MESSAGE_RECIEVED",
+      createMessage("Admin", `Hi ${user.name}, welcome to the chat!`)
+    );
+    socket.broadcast.emit(
+      "MESSAGE_RECIEVED",
+      createMessage("Admin", `${user.name}, has joined the chat.`)
+    );
   });
 
   // remove disconnected user from connectedUsers array
@@ -38,7 +35,10 @@ const socketManager = (socket, io) => {
     if (name) {
       removeUser(name);
       io.emit("USER_DISCONNECTED", connectedUsers);
-      console.log(`${name}, has been removed from connectedUsers`);
+      socket.broadcast.emit(
+        "MESSAGE_RECIEVED",
+        createMessage("Admin", `${name}, has left the chat.`)
+      );
     }
   });
 };
@@ -56,23 +56,30 @@ const removeUser = (name) => {
 };
 
 const isUser = (nickname) => {
-  return connectedUsers.some((user) => user.name === nickname);
+  return connectedUsers.some(
+    (user) => user.name.trim().toLowerCase() === nickname.trim().toLowerCase()
+  );
 };
 
 const createUser = (nickname) => {
   return {
-    name: nickname,
+    name: capitaliseFirstLetter(nickname),
     id: uuidv4(),
     chat: "community",
   };
 };
 
-const createChat = (chat) => {
+const createMessage = (from, message) => {
   return {
-    chat: chat,
+    from: capitaliseFirstLetter(from),
+    message: message,
     id: uuidv4(),
-    members: [],
+    time: moment().format("h:mm a"),
   };
+};
+
+const capitaliseFirstLetter = (str) => {
+  return str[0].toUpperCase() + str.slice(1);
 };
 
 module.exports = { socketManager };

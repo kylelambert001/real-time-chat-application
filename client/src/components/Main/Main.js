@@ -5,11 +5,9 @@ import MessageForm from "../MessageForm/MessageForm";
 import "./Main.css";
 
 function Main(props) {
-  const { current_chat } = props;
   return (
     <div className="Main">
-      <h1>{`Chat name: ${current_chat.chat ? current_chat.chat : ""}`}</h1>
-      <MessageFeed />
+      <MessageFeed messages={props.messages} user={props.user} />
       <MessageForm />
     </div>
   );

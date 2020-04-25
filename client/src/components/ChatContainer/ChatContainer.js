@@ -8,23 +8,20 @@ class ChatContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current_chat: "",
+      messages: [],
     };
   }
 
   componentDidMount() {
     const { socket } = this.props;
 
-    socket.emit("INIT_CHAT");
-
-    socket.on("CHAT_CHANGED", (chat) => {
-      this.setState({ current_chat: chat });
-      console.log(chat);
+    socket.on("MESSAGE_RECIEVED", (msg) => {
+      this.setState((state) => ({
+        messages: [...state.messages, msg],
+      }));
     });
 
-    socket.on("USER_DISCONNECTED", (connectedUsers) => {
-      console.log(connectedUsers);
-    });
+    socket.on("USER_DISCONNECTED", (connectedUsers) => {});
   }
 
   componentWillUnmount() {
@@ -34,10 +31,12 @@ class ChatContainer extends Component {
   }
 
   render() {
+    const { messages } = this.state;
+    const { user } = this.props;
     return (
       <div className="ChatContainer">
         <Sidebar />
-        <Main current_chat={this.state.current_chat} />
+        <Main messages={messages} user={user} />
       </div>
     );
   }
