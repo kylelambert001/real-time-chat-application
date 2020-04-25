@@ -8,7 +8,6 @@ const { socketManager } = require("./socketManager.js");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-// require("./socketManager.js")(io);
 
 const PORT = process.env.PORT || 5000;
 

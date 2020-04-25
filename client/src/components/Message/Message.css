@@ -1,20 +1,18 @@
 .Message {
   display: flex;
+  margin-bottom: 0.3rem;
 }
 
 .Message-sender {
   justify-content: flex-end;
-  /* background-color: #424874; */
 }
 
 .Message-reciever {
   justify-content: flex-start;
-  /* background-color: #dcd6f7; */
 }
 
 .Message-box {
   width: 60%;
-  margin: 0.5rem 2rem;
 }
 
 .Message-bubble {
@@ -35,7 +33,7 @@
 
 .Message-info {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin: 0.5rem 1.5rem;
 }
 
@@ -47,7 +45,7 @@
 
 .Message-time {
   color: #a6b1e1;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 

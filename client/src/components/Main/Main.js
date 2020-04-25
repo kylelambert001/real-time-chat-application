@@ -8,7 +8,7 @@ function Main(props) {
   return (
     <div className="Main">
       <MessageFeed messages={props.messages} user={props.user} />
-      <MessageForm />
+      <MessageForm sendMessage={props.sendMessage} />
     </div>
   );
 }

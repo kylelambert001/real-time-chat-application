@@ -13,6 +13,10 @@ class Layout extends Component {
     };
   }
 
+  resetUser = () => {
+    this.setState({ user: "" });
+  };
+
   componentDidMount() {
     this.initSocket();
   }
@@ -36,7 +40,7 @@ class Layout extends Component {
     const { user, socket } = this.state;
 
     return user ? (
-      <ChatContainer socket={socket} user={user} />
+      <ChatContainer resetUser={this.resetUser} socket={socket} user={user} />
     ) : (
       <Login setUser={this.setUser} socket={socket} />
     );

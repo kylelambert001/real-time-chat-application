@@ -29,6 +29,10 @@ const socketManager = (socket, io) => {
     );
   });
 
+  socket.on("MESSAGE_SENT", (msg) => {
+    io.emit("MESSAGE_RECIEVED", createMessage(socket.name, msg));
+  });
+
   // remove disconnected user from connectedUsers array
   socket.on("disconnect", () => {
     const name = socket.name;
@@ -74,7 +78,7 @@ const createMessage = (from, message) => {
     from: capitaliseFirstLetter(from),
     message: message,
     id: uuidv4(),
-    time: moment().format("h:mm a"),
+    time: moment().format("h:mma"),
   };
 };
 
