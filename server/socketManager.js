@@ -34,7 +34,8 @@ const socketManager = (socket, io) => {
   });
 
   // remove disconnected user from connectedUsers array
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (reason) => {
+    console.log(reason);
     const name = socket.name;
     if (name) {
       removeUser(name);
